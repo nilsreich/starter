@@ -6,7 +6,7 @@ const MODULES: Record<
   string,
   { rm: string[]; lines?: Record<string, RegExp>; scripts?: string[]; deps?: string[] }
 > = {
-  deploy: { rm: ["Dockerfile", ".dockerignore", "deploy", ".github/workflows/deploy.yml"] },
+  deploy: { rm: ["Dockerfile", ".dockerignore", "deploy"] },
   sync: {
     rm: ["src/client/sync", "src/server/sync.test.ts"],
     lines: { "src/client/main.tsx": /Modul sync/, "index.html": /id="sync"/ },
