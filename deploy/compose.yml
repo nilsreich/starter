@@ -1,5 +1,5 @@
 # Wird beim Deploy nach /srv/apps/<repo>/compose.yml kopiert.
-# IMAGE und APP_HOST setzt der Deploy-Workflow. Keine Ports veröffentlichen – Caddy routet.
+# IMAGE und APP_HOST setzt der Deploy. Keine Ports veröffentlichen – Caddy routet.
 services:
   app:
     image: ${IMAGE}
