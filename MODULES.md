@@ -3,7 +3,7 @@
 Kern (immer): `src/shared`, `src/client/store` (IndexedDB, Quelle der Wahrheit), `src/client/ui`, `src/client/App.tsx`, PWA.
 Neue App: Ordner kopieren, dann `git -C <starter> rev-parse HEAD > .starter-version` (Basis für spätere Updates: `git -C <starter> diff $(cat .starter-version)..HEAD -- <Modulpfade>`).
 
-Entfernen: `bun scripts/strip.ts deploy sync server` (beliebige Teilmenge; `server` entfernt immer auch `sync` und `deploy`), dann `bun install && bun run check`. `bun run check` prüft das – Kern darf nie aus `sync/` oder `server/` importieren.
+Entfernen: `bun scripts/strip.ts deploy sync server` (beliebige Teilmenge; `server` entfernt immer auch `sync` und `deploy`), dann `bun install && bun run check`. Kern darf nie aus `sync/` oder `server/` importieren.
 
 | Modul | Ordner/Dateien | Berührungspunkte außerhalb |
 |---|---|---|

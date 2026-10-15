@@ -30,7 +30,7 @@ function runBackup() {
   return true;
 }
 
-// `backup`: einmaliger Snapshot (vom Deploy-Workflow vor dem Volume-Backup aufgerufen).
+// `backup`: einmaliger Snapshot (z. B. vor einem Volume-Backup per `docker compose exec app bun src/server/index.ts backup`).
 if (cmd === "backup") process.exit(runBackup() ? 0 : 1);
 
 const passwordHash = process.env.APP_PASSWORD_HASH ?? "";

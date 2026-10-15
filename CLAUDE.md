@@ -11,5 +11,5 @@ Aufbau und Module: **`MODULES.md`** (Kern: store/ui/shared; Module: sync, server
 - UI: nur Komponenten aus `src/client/ui/atoms.tsx` und Tokens aus `ui/tokens.css`; Regeln in `~/.claude/design-systems/klar-leicht/CLAUDE-CODE-RULES.md`. `src/client/ui` ist vendored (nicht von Biome geprüft).
 - Auth (Modul server): Einzelnutzer, Passwort-Hash in `APP_PASSWORD_HASH` (siehe `.env.example`, in einfachen Anführungszeichen), Session in SQLite, Cookie HttpOnly/SameSite=Lax. Login nur als Hinweis im Sync-Panel.
 - Neue Abhängigkeiten nur mit Begründung; wenige Deps sind Ziel.
-- Deploy (Modul deploy): Dockerfile und `deploy/`; Smoke-Test `/health` = `ok`. Daten in `/data` (`app.db`, `backup.db` = `VACUUM INTO`-Snapshot).
+- Deploy (Modul deploy): Dockerfile und `deploy/`; kein Workflow im Starter – das eigene Deployment braucht Smoke-Test `/health` = `ok` und vor Updates ein Backup (`backup`-Befehl). Daten in `/data` (`app.db`, `backup.db` = `VACUUM INTO`-Snapshot).
 - Dev: `bun run dev` (mit Server: :8080 + Vite-Proxy; ohne: nur Vite).
