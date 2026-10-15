@@ -7,6 +7,8 @@ export function App() {
   const [items, setItems] = useState<Item[] | null>(null);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
+  const [fieldError, setFieldError] = useState("");
+  const fieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const load = () => void list().then(setItems);
@@ -36,12 +38,28 @@ export function App() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (!title.trim()) return;
-          void run(() => upsert({ title, done: false }));
+          if (!title.trim()) {
+            setFieldError("Bitte einen Titel eingeben.");
+            fieldRef.current?.focus();
+            return;
+          }
+          setFieldError("");
+          void run(() => upsert({ title: title.trim(), done: false }));
           setTitle("");
+          fieldRef.current?.focus();
         }}
       >
-        <TextField label="Neuer Eintrag" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <TextField
+          ref={fieldRef}
+          label="Neuer Eintrag"
+          maxLength={120}
+          value={title}
+          error={fieldError}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            setFieldError("");
+          }}
+        />
         <Button type="submit" variant="primary">
           Hinzufügen
         </Button>
@@ -51,21 +69,26 @@ export function App() {
           {error}
         </p>
       )}
-      <ul>
-        {items.map((i) => (
-          <li key={i.id}>
-            <Checkbox
-              checked={i.done}
-              onChange={() => void run(() => upsert({ ...i, done: !i.done }))}
-            >
-              {i.title}
-            </Checkbox>
-            <Button variant="quiet" onClick={() => void run(() => remove(i.id))}>
-              Löschen
-            </Button>
-          </li>
-        ))}
-      </ul>
+      {items.length === 0 && (
+        <p className="kl-status">Noch keine Einträge. Lege oben den ersten an.</p>
+      )}
+      {items.length > 0 && (
+        <ul>
+          {items.map((i) => (
+            <li key={i.id}>
+              <Checkbox
+                checked={i.done}
+                onChange={() => void run(() => upsert({ ...i, done: !i.done }))}
+              >
+                {i.title}
+              </Checkbox>
+              <Button variant="quiet" onClick={() => void run(() => remove(i.id))}>
+                Löschen
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
       <Backup onError={setError} />
     </main>
   );
@@ -75,7 +98,7 @@ export function App() {
 function Backup({ onError }: { onError: (m: string) => void }) {
   const fileRef = useRef<HTMLInputElement>(null);
   return (
-    <p>
+    <div className="actions">
       <Button
         variant="quiet"
         onClick={async () => {
@@ -111,6 +134,6 @@ function Backup({ onError }: { onError: (m: string) => void }) {
           }
         }}
       />
-    </p>
+    </div>
   );
 }

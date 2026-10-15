@@ -46,7 +46,7 @@ export function TextField({
         </p>
       )}
       {error && (
-        <p id={`${fieldId}-error`} className="kl-error">
+        <p id={`${fieldId}-error`} className="kl-error" role="alert">
           {error}
         </p>
       )}

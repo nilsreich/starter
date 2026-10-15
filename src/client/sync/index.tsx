@@ -43,7 +43,10 @@ function SyncPanel() {
             autoComplete="current-password"
             value={password}
             error={error}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setError("");
+            }}
           />
           <Button type="submit" variant="primary">
             Anmelden

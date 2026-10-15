@@ -1,17 +1,54 @@
-main {
-  max-width: 40rem;
+/* Fokus-Rahmen (LAYOUT.md): max. 52,5rem inkl. Außenpadding; 16/24/48px je Seite */
+.frame {
+  max-width: 52.5rem;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 16px;
+}
+@media (min-width: 37.5625rem) {
+  .frame {
+    padding: 24px;
+  }
+}
+@media (min-width: 65.6875rem) {
+  .frame {
+    padding: 48px;
+  }
+}
+/* Abschnitte 32px, eng zusammengehörige Gruppen 16px */
+main,
+#sync section {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+main {
+  gap: 32px;
+}
+#sync {
+  margin-bottom: 32px;
+}
+form {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+form .kl-field {
+  width: 100%;
 }
 ul {
   list-style: none;
-  margin: 24px 0;
+  margin: 0;
   padding: 0;
 }
 li {
+  padding: 8px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 8px 0;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
