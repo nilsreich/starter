@@ -16,10 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        modules: ["sync", "deploy", "server", "sync deploy server"]
+        modules: ["sync", "deploy", "server"]
     steps:
       - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
       - run: bun scripts/strip.ts ${{ matrix.modules }}
+      - run: bun install # Lockfile passt nach dem Entfernen nicht mehr; Abhängigkeiten neu auflösen
       - run: bun run check

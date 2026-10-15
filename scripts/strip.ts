@@ -1,5 +1,5 @@
 // Entfernt Module aus dem Starter (siehe MODULES.md): bun scripts/strip.ts <deploy|sync|server>...
-// Die CI führt `bun scripts/strip.ts deploy sync server && bun run check` aus – so bleibt das Entfernen getestet.
+// Die CI führt `bun scripts/strip.ts <Modul> && bun install && bun run check` je Modul aus (`server` entfernt auch sync und deploy) – so bleibt das Entfernen getestet.
 import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 
 const MODULES: Record<
