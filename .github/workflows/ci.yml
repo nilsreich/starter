@@ -1,0 +1,25 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+  # Ebene 0: Module müssen sich restlos entfernen lassen (siehe MODULES.md)
+  strip:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        modules: ["sync", "deploy", "server", "sync deploy server"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun scripts/strip.ts ${{ matrix.modules }}
+      - run: bun run check

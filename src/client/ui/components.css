@@ -1,0 +1,302 @@
+@import "./tokens.css";
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./fonts/ibm-plex-sans.ttf") format("truetype");
+  font-weight: 100 700;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--ink);
+}
+html[data-mode="light"] {
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  font-family: var(--type-body-font-family);
+  font-size: var(--type-body-font-size);
+  font-weight: var(--type-body-font-weight);
+  line-height: var(--type-body-line-height);
+  letter-spacing: var(--type-body-letter-spacing);
+}
+button,
+input {
+  font: inherit;
+}
+button,
+input,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  color: var(--ink);
+  text-underline-offset: 0.25em;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+h1 {
+  font-family: var(--type-headline-font-family);
+  font-size: var(--type-headline-font-size);
+  font-weight: var(--type-headline-font-weight);
+  line-height: var(--type-headline-line-height);
+  letter-spacing: var(--type-headline-letter-spacing);
+}
+h2 {
+  font-family: var(--type-title-font-family);
+  font-size: var(--type-title-font-size);
+  font-weight: var(--type-title-font-weight);
+  line-height: var(--type-title-line-height);
+  letter-spacing: var(--type-title-letter-spacing);
+}
+p,
+h1,
+h2 {
+  margin: 0;
+}
+.kl-button {
+  border: 1px solid var(--control-line);
+  min-height: 48px;
+  overflow-wrap: anywhere;
+  font-family: var(--type-label-font-family);
+  font-size: var(--type-label-font-size);
+  font-weight: var(--type-label-font-weight);
+  line-height: var(--type-label-line-height);
+  letter-spacing: var(--type-label-letter-spacing);
+}
+.kl-button--primary {
+  background: var(--button-primary-background-color);
+  color: var(--button-primary-text-color);
+  border-color: var(--action);
+  border-radius: var(--button-primary-rounded);
+  padding: var(--button-primary-padding);
+}
+.kl-button--secondary {
+  background: var(--button-secondary-background-color);
+  color: var(--button-secondary-text-color);
+  border-radius: var(--button-secondary-rounded);
+  padding: var(--button-secondary-padding);
+}
+.kl-button--quiet {
+  background: var(--button-quiet-background-color);
+  color: var(--button-quiet-text-color);
+  border-color: transparent;
+  border-radius: var(--button-quiet-rounded);
+  padding: var(--button-quiet-padding);
+}
+.kl-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.kl-field {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.kl-field > label,
+.kl-progress > label {
+  font-size: var(--type-label-font-size);
+  font-weight: var(--type-label-font-weight);
+}
+.kl-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  background: var(--input-text-background-color);
+  color: var(--input-text-text-color);
+  border: 1px solid var(--control-line);
+  border-radius: var(--input-text-rounded);
+  padding: var(--input-text-padding);
+}
+.kl-input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+.kl-error {
+  color: var(--error);
+}
+.kl-status {
+  color: var(--muted);
+  font-family: var(--type-status-font-family);
+  font-size: var(--type-status-font-size);
+  line-height: var(--type-status-line-height);
+}
+.kl-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  cursor: pointer;
+  min-width: 0;
+}
+.kl-checkbox input {
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  flex: 0 0 var(--checkbox-size);
+  accent-color: var(--progress-fill);
+  margin: 0;
+}
+.kl-checkbox span {
+  overflow-wrap: anywhere;
+}
+.kl-progress {
+  display: grid;
+  gap: var(--space-1);
+}
+.kl-progress progress {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border: 0;
+  background: var(--line);
+}
+.kl-progress progress::-webkit-progress-bar {
+  background: var(--line);
+}
+.kl-progress progress::-webkit-progress-value {
+  background: var(--progress-fill);
+}
+.kl-progress progress::-moz-progress-bar {
+  background: var(--progress-fill);
+}
+.kl-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (forced-colors: active) {
+  .kl-button--primary {
+    border-color: ButtonText;
+  }
+  .kl-progress progress {
+    forced-color-adjust: none;
+    background: Canvas;
+    border: 1px solid CanvasText;
+  }
+  .kl-progress progress::-webkit-progress-bar {
+    background: Canvas;
+  }
+  .kl-progress progress::-webkit-progress-value {
+    background: CanvasText;
+  }
+  .kl-progress progress::-moz-progress-bar {
+    background: CanvasText;
+  }
+}
+
+/* Die Varianten übernehmen ihre vollständige Typografierolle. */
+.kl-button--primary {
+  font:
+    var(--button-primary-font-weight) var(--button-primary-font-size) /
+    var(--button-primary-line-height) var(--button-primary-font-family);
+  letter-spacing: var(--button-primary-letter-spacing);
+}
+.kl-button--secondary {
+  font:
+    var(--button-secondary-font-weight) var(--button-secondary-font-size) /
+    var(--button-secondary-line-height) var(--button-secondary-font-family);
+  letter-spacing: var(--button-secondary-letter-spacing);
+}
+.kl-button--quiet {
+  font:
+    var(--button-quiet-font-weight) var(--button-quiet-font-size) / var(--button-quiet-line-height)
+    var(--button-quiet-font-family);
+  letter-spacing: var(--button-quiet-letter-spacing);
+}
+
+.kl-toast-viewport {
+  position: fixed;
+  z-index: 20;
+  right: max(var(--space-3), env(safe-area-inset-right));
+  bottom: max(var(--space-3), env(safe-area-inset-bottom));
+  width: min(420px, calc(100% - 32px));
+  max-height: 50dvh;
+  overflow-y: auto;
+  display: grid;
+  gap: var(--space-1);
+  padding: 6px;
+  scroll-padding: 6px;
+  overscroll-behavior: contain;
+}
+.kl-toast-viewport:empty {
+  display: none;
+}
+.kl-toast {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 48px;
+  align-items: start;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--control-line);
+  border-radius: var(--radius-container);
+}
+.kl-toast-icon {
+  width: 24px;
+  height: 24px;
+  margin-top: 4px;
+  color: var(--focus);
+}
+.kl-toast--success .kl-toast-icon {
+  color: var(--progress-fill);
+}
+.kl-toast--error .kl-toast-icon {
+  color: var(--error);
+}
+.kl-toast-copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.kl-toast-title {
+  font-size: var(--type-label-font-size);
+  line-height: var(--type-label-line-height);
+  font-weight: 600;
+}
+.kl-toast-message {
+  margin-top: var(--space-1);
+  font-size: var(--type-status-font-size);
+  line-height: var(--type-status-line-height);
+  color: var(--muted);
+}
+.kl-toast .kl-toast-dismiss {
+  width: 48px;
+  min-height: 48px;
+  padding: 12px;
+}
+.kl-toast-dismiss svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+@media (max-width: 600px) {
+  .kl-toast-viewport {
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: calc(100% - 20px);
+  }
+}
+@media (forced-colors: active) {
+  .kl-toast {
+    border-color: CanvasText;
+  }
+  .kl-toast-icon {
+    color: CanvasText;
+  }
+}
