@@ -5,7 +5,7 @@ Aufbau und Module: **`MODULES.md`** (Kern: store/ui/shared; Module: sync, server
 
 - **Fertig = `bun run check` grün** (tsc client+server, biome, bun test, vite build). Vorher nie „fertig“ melden.
 - **Local-first:** IndexedDB (`src/client/store`) ist die einzige Quelle der Wahrheit. Die UI spricht nur mit dem Store (`list/upsert/remove/subscribe`), nie mit dem Netz. Sync (`src/client/sync`) läuft im Hintergrund und zeigt nur einen Status.
-- **Kern darf nie aus `sync/` oder `server/` importieren** (`bun scripts/strip.ts <Modul>` entfernt ein Modul, danach muss `check` grün sein). Neue Berührungspunkte in `MODULES.md` und `scripts/strip.ts` eintragen.
+- **Kern darf nie aus `sync/` oder `server/` importieren** (`bun scripts/strip.ts <Modul>` entfernt ein Modul, danach muss `check` grün sein – nur in einer Wegwerf-Kopie ausführen, nie im Starter selbst). Neue Berührungspunkte in `MODULES.md` und `scripts/strip.ts` eintragen.
 - Datenmodell: Client-UUID, `updatedAt` strikt steigend (vergibt der Store), Soft-Delete, Schema nur additiv mit `.default()`; Sync-Cursor ist die server-vergebene `seq`, nie `updatedAt`.
 - Neues Feature: Schema in `shared` → Store → UI → Test. Mit Server zusätzlich: Migration (`migrations/NNN_name.sql`, lückenlos) → Route (`zValidator`) → Test.
 - UI: nur Komponenten aus `src/client/ui/atoms.tsx` und Tokens aus `ui/tokens.css`; Regeln in `~/.claude/design-systems/klar-leicht/CLAUDE-CODE-RULES.md`. `src/client/ui` ist vendored (nicht von Biome geprüft).
